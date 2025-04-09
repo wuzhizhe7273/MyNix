@@ -31,6 +31,11 @@
        )
        '';
       };
+      git={
+        enable=true;
+        userName="MyNix";
+        userEmail="default@mynix.com";
+      };
       };
     })
   ];

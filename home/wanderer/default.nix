@@ -11,9 +11,9 @@
     home.stateVersion="24.11";
     programs={
       git={
-        enable=true;
-        userName="wanderer";
-        userEmail="1379605319@qq.com";
+        enable=lib.mkForce true;
+        userName=lib.mkForce "wanderer";
+        userEmail=lib.mkForce "1379605319@qq.com";
       };
     };
   };
