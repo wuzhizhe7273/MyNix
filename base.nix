@@ -1,6 +1,5 @@
 {pkgs,inputs, ...}:
 {
-  system.stateVersion = "24.11";
    # 启用 Flakes 特性以及配套的船新 nix 命令行工具
   nix.settings={
     experimental-features = [ "nix-command" "flakes" ];
@@ -17,6 +16,7 @@
     wget
     fastfetch
     nil
+    nixfmt
     #dev tool
     devbox
     nushell

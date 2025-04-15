@@ -7,17 +7,33 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
   outputs = inputs@{ self, nixpkgs, ... }: {
-    imports = [ ./configuration.nix ];
-    nixosConfigurations = {
-      nixos-wsl = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-         ./base.nix
-         ./hosts/wsl
-         ./home
-        ];
+    nixosConfigurations = let 
+      hosts={
+        nixos-wsl={
+          paltform= "x86_64-linux";
+          stateVersion="24.11";
+          modules=[
+            ./hosts/wsl 
+          ];
+        };
       };
-    };
+      mkHost = host: {paltform,stateVersion,modules} : nixpkgs.lib.nixosSystem
+        {
+        system=paltform;
+        specialArgs={
+          inherit inputs;
+        };
+        modules=[
+          {
+            networking.hostName=host;
+            system.stateVersion=stateVersion;
+          }
+          ./base.nix
+          ./home
+        ]++modules;
+      };
+      configurations = builtins.mapAttrs mkHost hosts;
+    in 
+       configurations;
   };
 }
