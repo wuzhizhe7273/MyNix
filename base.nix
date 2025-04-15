@@ -4,12 +4,6 @@
    # 启用 Flakes 特性以及配套的船新 nix 命令行工具
   nix.settings={
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = [
-          "https://cache.flox.dev"
-        ];
-        trusted-public-keys = [
-          "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs="
-        ];
   };
   imports=[inputs.vscode-server.nixosModules.default];
   # vscode server
@@ -24,7 +18,7 @@
     fastfetch
     nil
     #dev tool
-    inputs.flox.packages.${pkg.system}.default
+    devbox
     nushell
   ];
   # 默认nushell

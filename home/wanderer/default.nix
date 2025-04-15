@@ -1,4 +1,4 @@
-{lib,...}:{
+{lib,pkgs,...}:{
   users.users.wanderer={
     isNormalUser=true;
     description="wanderer";
@@ -14,6 +14,9 @@
         enable=lib.mkForce true;
         userName=lib.mkForce "wanderer";
         userEmail=lib.mkForce "1379605319@qq.com";
+        extraConfig= lib.mkForce {
+          credential.helper = "${pkgs.git.override { withLibsecret = true ;}}/bin/git-credential-libsecret";
+        };
       };
     };
   };
