@@ -13,7 +13,7 @@
     wget
     fastfetch
     nil
-    nixfmt
+    nixfmt-rfc-style
     #dev tool
     devbox
     nushell
