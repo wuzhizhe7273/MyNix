@@ -1,8 +1,12 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   users.users.wanderer = {
     isNormalUser = true;
     description = "wanderer";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     password = "chjh605319";
   };
   home-manager.users.wanderer = {
@@ -15,9 +19,7 @@
         userName = lib.mkForce "wanderer";
         userEmail = lib.mkForce "1379605319@qq.com";
         extraConfig = lib.mkForce {
-          credential.helper = "${
-              pkgs.git.override { withLibsecret = true; }
-            }/bin/git-credential-libsecret";
+          credential.helper = "${pkgs.git.override { withLibsecret = true; }}/bin/git-credential-libsecret";
         };
       };
     };
