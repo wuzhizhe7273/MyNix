@@ -1,6 +1,12 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   # 启用 Flakes 特性以及配套的船新 nix 命令行工具
-  nix.settings = { experimental-features = [ "nix-command" "flakes" ]; };
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
   imports = [ inputs.vscode-server.nixosModules.default ];
   # vscode server
   services.vscode-server.enable = true;
@@ -16,6 +22,7 @@
     nixfmt-rfc-style
     #dev tool
     devbox
+    devenv
     nushell
   ];
   # 默认nushell
@@ -23,5 +30,7 @@
   # 将默认编辑器设置为 vim
   environment.variables.EDITOR = "vim";
   #启用nix-ld
-  programs = { nix-ld.enable = true; };
+  programs = {
+    nix-ld.enable = true;
+  };
 }
